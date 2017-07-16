@@ -5,6 +5,7 @@ from keras.layers import Dense
 from keras.layers import LSTM
 import keras
 
+from typing import Set
 
 # Fill out the function below that transforms the input series
 # and window-size into a set of input/output pairs for use with our RNN model
@@ -31,10 +32,10 @@ def build_part1_RNN(window_size):
 
 
 # Return the text input with only ascii lowercase and the punctuation given below included.
-def cleaned_text(text):
-    punctuation = set("!,.:;? ")
-    lower = set('abcdefghijklmnopqrstuvwxyz')
-    keep = lower + punctuation
+def cleaned_text(text: str) -> str:
+    punctuation: Set[chr] = set("!,.:;? ")
+    lower: Set[chr] = set('abcdefghijklmnopqrstuvwxyz')
+    keep = lower | punctuation
     valid = str(map(lambda x: x if x in keep else ' ', text))
     return valid
 

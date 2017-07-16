@@ -5,7 +5,7 @@ from keras.layers import Dense
 from keras.layers import LSTM
 import keras
 
-from typing import Set
+from typing import List, Set, Tuple
 
 # Fill out the function below that transforms the input series
 # and window-size into a set of input/output pairs for use with our RNN model
@@ -40,13 +40,14 @@ def cleaned_text(text: str) -> str:
     return valid
 
 
-### TODO: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
-def window_transform_text(text, window_size, step_size):
+# Fill out the function below that transforms the input text and window-size into a set of input/output pairs
+# for use with our RNN model
+def window_transform_text(text: str, window_size: int, step_size: int) -> Tuple[np.array, np.array]:
     # containers for input/output pairs
-    inputs = []
-    outputs = []
+    inputs = [text[ix:ix + window_size] for ix in range(len(text) - window_size, step=step_size)]
+    outputs = [text[iy] for iy in range(window_size, len(text), step=step_size)]
 
-    return inputs,outputs
+    return np.asarray(inputs), np.asarray(outputs)
 
 # TODO build the required RNN model: 
 # a single LSTM hidden layer with softmax activation, categorical_crossentropy loss 

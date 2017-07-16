@@ -36,7 +36,7 @@ def cleaned_text(text: str) -> str:
     punctuation: Set[chr] = set("!,.:;? ")
     lower: Set[chr] = set('abcdefghijklmnopqrstuvwxyz')
     keep = lower | punctuation
-    valid = str(map(lambda x: x if x in keep else ' ', text))
+    valid = "".join(map(lambda x: x if x in keep else ' ', text))
     return valid
 
 

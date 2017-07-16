@@ -29,11 +29,15 @@ def build_part1_RNN(window_size):
     model.add(Dense(1))
     return model
 
-### TODO: return the text input with only ascii lowercase and the punctuation given below included.
-def cleaned_text(text):
-    punctuation = ['!', ',', '.', ':', ';', '?']
 
-    return text
+# Return the text input with only ascii lowercase and the punctuation given below included.
+def cleaned_text(text):
+    punctuation = set("!,.:;? ")
+    lower = set('abcdefghijklmnopqrstuvwxyz')
+    keep = lower + punctuation
+    valid = str(map(lambda x: x if x in keep else ' ', text))
+    return valid
+
 
 ### TODO: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
 def window_transform_text(text, window_size, step_size):

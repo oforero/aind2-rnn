@@ -44,8 +44,8 @@ def cleaned_text(text: str) -> str:
 # for use with our RNN model
 def window_transform_text(text: str, window_size: int, step_size: int) -> Tuple[np.array, np.array]:
     # containers for input/output pairs
-    inputs = [text[ix:ix + window_size] for ix in range(len(text) - window_size, step=step_size)]
-    outputs = [text[iy] for iy in range(window_size, len(text), step=step_size)]
+    inputs = [text[ix:ix + window_size] for ix in range(len(text) - window_size, step_size)]
+    outputs = [text[iy] for iy in range(window_size, len(text), step_size)]
 
     return np.asarray(inputs), np.asarray(outputs)
 

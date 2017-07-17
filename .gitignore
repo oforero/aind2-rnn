@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Jupyter Notebook
-.ipynb_checkpoints
+*checkpoint.ipynb
 
 # dotenv
 .env
@@ -19,3 +19,7 @@ ENV/
 
 # PyCharm
 .idea
+
+# Grader files
+*.zip
+*.json

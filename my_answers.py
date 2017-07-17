@@ -5,7 +5,6 @@ from keras.layers import Dense
 from keras.layers import LSTM
 import keras
 
-from typing import List, Set, Tuple
 
 # Fill out the function below that transforms the input series
 # and window-size into a set of input/output pairs for use with our RNN model
@@ -24,7 +23,7 @@ def window_transform_series(series, window_size):
 
 
 # Build an RNN to perform regression on our time series input/output data
-def build_part1_RNN(window_size: int) -> Sequential:
+def build_part1_RNN(window_size):
     model = Sequential()
     model.add(LSTM(5, input_shape=(window_size, 1)))
     model.add(Dense(1))
@@ -32,9 +31,9 @@ def build_part1_RNN(window_size: int) -> Sequential:
 
 
 # Return the text input with only ascii lowercase and the punctuation given below included.
-def cleaned_text(text: str) -> str:
-    punctuation: Set[chr] = set("!,.:;? ")
-    lower: Set[chr] = set('abcdefghijklmnopqrstuvwxyz')
+def cleaned_text(text):
+    punctuation = set("!,.:;? ")
+    lower = set('abcdefghijklmnopqrstuvwxyz')
     keep = lower | punctuation
     valid = "".join(list(map(lambda x: x if x in keep else ' ', text)))
     return valid
@@ -42,7 +41,7 @@ def cleaned_text(text: str) -> str:
 
 # Fill out the function below that transforms the input text and window-size into a set of input/output pairs
 # for use with our RNN model
-def window_transform_text(text: str, window_size: int, step_size: int) -> Tuple[np.array, np.array]:
+def window_transform_text(text, window_size, step_size):
     # containers for input/output pairs
     inputs = [text[ix:ix + window_size] for ix in range(0, len(text) - window_size, step_size)]
     outputs = [text[iy] for iy in range(window_size, len(text), step_size)]
@@ -50,9 +49,9 @@ def window_transform_text(text: str, window_size: int, step_size: int) -> Tuple[
     return np.asarray(inputs), np.asarray(outputs)
 
 
-# TODO build the required RNN model: 
+# Build the required RNN model:
 # a single LSTM hidden layer with softmax activation, categorical_crossentropy loss 
-def build_part2_RNN(window_size: int, num_chars: int) -> Sequential:
+def build_part2_RNN(window_size, num_chars):
     model = Sequential()
     model.add(LSTM(200, input_shape=(window_size, num_chars)))
     model.add(Dense(num_chars, activation="linear"))

@@ -45,7 +45,7 @@ def window_transform_text(text, window_size, step_size):
     inputs = [text[ix:ix + window_size] for ix in range(0, len(text) - window_size, step_size)]
     outputs = [text[iy] for iy in range(window_size, len(text), step_size)]
 
-    return np.asarray(inputs), np.asarray(outputs)
+    return inputs, outputs
 
 
 # Build the required RNN model:
